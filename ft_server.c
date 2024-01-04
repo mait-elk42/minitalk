@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 23:10:05 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/03 14:00:23 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/04 18:48:01 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@ void	_nsx_handler(int sig, siginfo_t *s_info, void *_custom_data)
 		pid = 0;
 		_nsx_pc('\n');
 	}
-	if (((sig == SIGUSR1) || (sig == SIGUSR2)) && byte.len++)
+	if (((sig == SIGUSR1) || (sig == SIGUSR2)))
 		byte.bits = (byte.bits << 1) + (sig == SIGUSR1);
+	byte.len++;
 	if (byte.len == 8)
 	{
 		if (byte.bits == '\0')
@@ -37,7 +38,6 @@ void	_nsx_handler(int sig, siginfo_t *s_info, void *_custom_data)
 			write(1, &byte.bits, 1);
 		byte.bits = 0;
 		byte.len = 0;
-		pid = 0;
 	}
 }
 

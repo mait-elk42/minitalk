@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 16:00:53 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/04 15:27:21 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/04 18:43:57 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 
 typedef struct s_nsx_byte
 {
-	int	bits;
-	int	len;
+	char	bits;
+	char	len;
 }	t_nsx_byte;
 
 void	_nsx_pc(char c);
