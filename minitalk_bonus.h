@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 16:00:53 by mait-elk          #+#    #+#             */
-/*   Updated: 2023/12/22 23:39:58 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/04 15:27:21 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
+
+typedef struct s_nsx_byte
+{
+	int	bits;
+	int	len;
+}	t_nsx_byte;
 
 void	_nsx_pc(char c);
 void	_nsx_ps(char *str);

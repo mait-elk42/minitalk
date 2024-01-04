@@ -6,30 +6,38 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 23:10:05 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/01 22:00:12 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/03 14:00:23 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-void	_nsx_handler(int sig)
+void	_nsx_handler(int sig, siginfo_t *s_info, void *_custom_data)
 {
-	static char	bits;
-	static int	len;
+	static t_nsx_byte	byte;
+	static int			pid;
 
-	if (sig == SIGUSR1)
-		bits = (bits << 1) + 1;
-	else if (sig == SIGUSR2)
-		bits = (bits << 1);
-	len++;
-	if (len == 8)
+	(void)_custom_data;
+	if (pid == 0)
+		pid = s_info->si_pid;
+	if (pid != s_info->si_pid)
 	{
-		if (bits == '\0')
+		byte.bits = 0;
+		byte.len = 0;
+		pid = 0;
+		_nsx_pc('\n');
+	}
+	if (((sig == SIGUSR1) || (sig == SIGUSR2)) && byte.len++)
+		byte.bits = (byte.bits << 1) + (sig == SIGUSR1);
+	if (byte.len == 8)
+	{
+		if (byte.bits == '\0')
 			write(1, "\n", 1);
 		else
-			write(1, &bits, 1);
-		bits = 0;
-		len = 0;
+			write(1, &byte.bits, 1);
+		byte.bits = 0;
+		byte.len = 0;
+		pid = 0;
 	}
 }
 
@@ -53,14 +61,16 @@ void	_nsx_putbanner(int pid)
 
 int	main(void)
 {
-	int	pid;
+	struct sigaction	act;
+	int					pid;
 
 	pid = getpid();
+	act.__sigaction_u.__sa_sigaction = _nsx_handler;
 	_nsx_putbanner(pid);
-	signal(SIGUSR1, _nsx_handler);
-	signal(SIGUSR2, _nsx_handler);
 	while (1)
 	{
+		sigaction(SIGUSR1, &act, 0);
+		sigaction(SIGUSR2, &act, 0);
 		pause();
 	}
 	return (0);
