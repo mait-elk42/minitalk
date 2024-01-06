@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 23:09:44 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/04 12:42:16 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/05 19:00:48 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int	_nsx_send_str(char *str, int pid)
 			return (-1);
 		str++;
 	}
-	_nsx_send_char('\n', pid);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 23:09:44 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/04 15:33:01 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/06 19:41:05 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	g_msg_status;
 
-void	_nsx_send_char(char c, int pid)
+int	_nsx_send_char(char c, int pid)
 {
 	int		i;
 
@@ -22,22 +22,31 @@ void	_nsx_send_char(char c, int pid)
 	while (i--)
 	{
 		if (c & 128)
-			kill(pid, SIGUSR1);
+		{
+			if (kill(pid, SIGUSR1) == -1)
+				return (-1);
+		}
 		else
-			kill(pid, SIGUSR2);
+		{
+			if (kill(pid, SIGUSR2) == -1)
+				return (-1);
+		}
 		usleep(100);
 		c <<= 1;
 	}
+	return (0);
 }
 
-void	_nsx_send_str(char *str, int pid)
+int	_nsx_send_str(char *str, int pid)
 {
 	while (*str)
 	{
-		_nsx_send_char(*str, pid);
+		if (_nsx_send_char(*str, pid) == -1)
+			return (-1);
 		str++;
 	}
 	_nsx_send_char('\0', pid);
+	return (0);
 }
 
 void	_nsx_handler(int sig)
@@ -58,8 +67,7 @@ int	main(int argc, char **argv)
 		pid = _nsx_atoi(argv[1]);
 		signal(SIGUSR1, _nsx_handler);
 		signal(SIGUSR2, _nsx_handler);
-		_nsx_send_str(argv[2], pid);
-		if (g_msg_status)
+		if (_nsx_send_str(argv[2], pid) != -1 && g_msg_status)
 		{
 			_nsx_pcolor('g');
 			_nsx_ps("MESSAGE RECEIVED");

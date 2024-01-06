@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 23:10:05 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/04 18:48:01 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/06 17:58:34 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,7 @@ void	_nsx_handler(int sig, siginfo_t *s_info, void *_custom_data)
 	byte.len++;
 	if (byte.len == 8)
 	{
-		if (byte.bits == '\0')
-			write(1, "\n", 1);
-		else
-			write(1, &byte.bits, 1);
+		write(1, &byte.bits, 1);
 		byte.bits = 0;
 		byte.len = 0;
 	}
@@ -53,8 +50,9 @@ void	_nsx_putbanner(int pid)
 	_nsx_ps("██║░╚═╝░██║██║██║░╚███║██║ ░░░██║░░░██║░░██║███████╗██║░╚██╗\n");
 	_nsx_ps("╚═╝░░░░░╚═╝╚═╝╚═╝░░╚══╝╚═╝ ░░░╚═╝░░░╚═╝░░╚═╝╚══════╝╚═╝░░╚═╝\n");
 	_nsx_ps("MANDATORY					\033[1;34m@mait-elk\n");
-	_nsx_p("\n\nPID:	\033[1;33m[ %d ]\n", pid);
-	_nsx_ps("\033[1;34m");
+	_nsx_ps("\n\nPID:	\033[1;33m[ ");
+	_nsx_pd(pid);
+	_nsx_ps(" ]\n\033[1;34m");
 	_nsx_ps("____________________________________________________________\n");
 	_nsx_ps("\033[0m\n");
 }

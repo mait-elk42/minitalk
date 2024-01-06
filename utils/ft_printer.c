@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 14:17:31 by mait-elk          #+#    #+#             */
-/*   Updated: 2023/12/22 17:19:36 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/06 18:26:00 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,33 +38,6 @@ void	_nsx_pd(int n)
 		return ((void)_nsx_pc(n + 48));
 	_nsx_pd(n / 10);
 	_nsx_pd(n % 10);
-}
-
-void	_nsx_p(char	*f, ...)
-{
-	va_list	l;
-
-	va_start(l, f);
-	while (*f)
-	{
-		if (*f == '%')
-		{
-			f++;
-			if (*f == 'c')
-				_nsx_pd(va_arg(l, int));
-			else
-				if (*f == 's')
-					_nsx_ps(va_arg(l, char *));
-			else
-				if (*f == 'd')
-					_nsx_pd(va_arg(l, int));
-			else
-				_nsx_pc(*f);
-		}
-		else
-			_nsx_pc(*f);
-		f++;
-	}
 }
 
 void	_nsx_pcolor(char color)
