@@ -6,6 +6,7 @@
 		"minitalk_bonus.h": "c",
 		"stdio.h": "c",
 		"unistd.h": "c",
-		"cstddef": "c"
+		"cstddef": "c",
+		"stdlib.h": "c"
 	}
 }

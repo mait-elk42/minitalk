@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 23:09:44 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/07 12:24:53 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/07 13:30:45 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,7 @@ int	main(int argc, char **argv)
 		_nsx_ps_exit("ERROR : YOU CAN'T SEND EMPTY MESSAGE", -1, 'r');
 	signal(SIGUSR1, _nsx_handler);
 	_nsx_send_str(argv[2], pid);
-	_nsx_ps_exit("MESSAGE RECEIVED", 0, 'g');
+	if (g_msg_status)
+		_nsx_ps_exit("MESSAGE RECEIVED", 0, 'g');
+	return (0);
 }

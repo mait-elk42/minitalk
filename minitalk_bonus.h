@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 16:00:53 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/07 11:14:41 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/07 13:25:01 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <signal.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include <stdarg.h>
 
 typedef struct s_nsx_byte
 {
