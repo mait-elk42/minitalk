@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 16:00:53 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/07 13:25:01 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/07 13:32:28 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ typedef struct s_nsx_byte
 
 void	_nsx_pc(char c);
 void	_nsx_ps(char *str);
-void	_nsx_pd(int n);
 void	_nsx_pd(int n);
 void	_nsx_pcolor(char color);
 void	_nsx_ps_exit(char *_msg, int status, char color);
