@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 14:17:31 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/06 18:26:00 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/07 11:14:34 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,12 @@ void	_nsx_pcolor(char color)
 			_nsx_ps("\033[1;34m");
 	else
 		_nsx_ps("\033[0m");
+}
+
+void	_nsx_ps_exit(char *_msg, int status, char color)
+{
+	_nsx_pcolor(color);
+	_nsx_ps(_msg);
+	_nsx_pcolor(0);
+	exit(status);
 }
