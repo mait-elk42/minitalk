@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 23:10:05 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/06 18:34:20 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/08 13:18:01 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	_nsx_handler(int sig, struct __siginfo *s_info, void *_custom_data)
 		byte.len = 0;
 		write(1, "\n", 1);
 	}
-	if (((sig == SIGUSR1) || (sig == SIGUSR2)))
+	if (sig == SIGUSR1 || sig == SIGUSR2)
 		byte.bits = (byte.bits << 1) + (sig == SIGUSR1);
 	byte.len++;
 	if (byte.len == 8)
@@ -41,25 +41,6 @@ void	_nsx_handler(int sig, struct __siginfo *s_info, void *_custom_data)
 	}
 }
 
-void	_nsx_putbanner(int pid)
-{
-	_nsx_ps("\033[1J\033[1;1H");
-	_nsx_ps("\n");
-	_nsx_pcolor('b');
-	_nsx_ps("███╗░░░███╗██╗███╗░░██╗██╗ ████████╗░█████╗░██╗░░░░░██╗░░██╗\n");
-	_nsx_ps("████╗░████║██║████╗░██║██║ ╚══██╔══╝██╔══██╗██║░░░░░██║░██╔╝\n");
-	_nsx_ps("██╔████╔██║██║██╔██╗██║██║ ░░░██║░░░███████║██║░░░░░█████═╝░\n");
-	_nsx_ps("██║╚██╔╝██║██║██║╚████║██║ ░░░██║░░░██╔══██║██║░░░░░██╔═██╗░\n");
-	_nsx_ps("██║░╚═╝░██║██║██║░╚███║██║ ░░░██║░░░██║░░██║███████╗██║░╚██╗\n");
-	_nsx_ps("╚═╝░░░░░╚═╝╚═╝╚═╝░░╚══╝╚═╝ ░░░╚═╝░░░╚═╝░░╚═╝╚══════╝╚═╝░░╚═╝\n");
-	_nsx_ps("bonus					\033[1;34m@mait-elk\n");
-	_nsx_ps("\n\nPID:	\033[1;33m[ ");
-	_nsx_pd(pid);
-	_nsx_ps(" ]\n\033[1;34m");
-	_nsx_ps("____________________________________________________________\n");
-	_nsx_ps("\033[0m\n");
-}
-
 int	main(void)
 {
 	struct sigaction	act;
@@ -67,7 +48,7 @@ int	main(void)
 
 	pid = getpid();
 	act.__sigaction_u.__sa_sigaction = _nsx_handler;
-	_nsx_putbanner(pid);
+	_nsx_putbanner(pid, "BONUS PART");
 	while (1)
 	{
 		sigaction(SIGUSR1, &act, NULL);

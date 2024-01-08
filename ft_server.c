@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 23:10:05 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/06 17:58:34 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/08 17:25:14 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,25 +38,6 @@ void	_nsx_handler(int sig, siginfo_t *s_info, void *_custom_data)
 	}
 }
 
-void	_nsx_putbanner(int pid)
-{
-	_nsx_ps("\033[1J\033[1;1H");
-	_nsx_pcolor('b');
-	_nsx_ps("\n");
-	_nsx_ps("███╗░░░███╗██╗███╗░░██╗██╗ ████████╗░█████╗░██╗░░░░░██╗░░██╗\n");
-	_nsx_ps("████╗░████║██║████╗░██║██║ ╚══██╔══╝██╔══██╗██║░░░░░██║░██╔╝\n");
-	_nsx_ps("██╔████╔██║██║██╔██╗██║██║ ░░░██║░░░███████║██║░░░░░█████═╝░\n");
-	_nsx_ps("██║╚██╔╝██║██║██║╚████║██║ ░░░██║░░░██╔══██║██║░░░░░██╔═██╗░\n");
-	_nsx_ps("██║░╚═╝░██║██║██║░╚███║██║ ░░░██║░░░██║░░██║███████╗██║░╚██╗\n");
-	_nsx_ps("╚═╝░░░░░╚═╝╚═╝╚═╝░░╚══╝╚═╝ ░░░╚═╝░░░╚═╝░░╚═╝╚══════╝╚═╝░░╚═╝\n");
-	_nsx_ps("MANDATORY					\033[1;34m@mait-elk\n");
-	_nsx_ps("\n\nPID:	\033[1;33m[ ");
-	_nsx_pd(pid);
-	_nsx_ps(" ]\n\033[1;34m");
-	_nsx_ps("____________________________________________________________\n");
-	_nsx_ps("\033[0m\n");
-}
-
 int	main(void)
 {
 	struct sigaction	act;
@@ -64,7 +45,7 @@ int	main(void)
 
 	pid = getpid();
 	act.__sigaction_u.__sa_sigaction = _nsx_handler;
-	_nsx_putbanner(pid);
+	_nsx_putbanner(pid, "MONDATORY PART");
 	while (1)
 	{
 		sigaction(SIGUSR1, &act, 0);

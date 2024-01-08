@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 16:00:53 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/07 13:32:28 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/08 18:03:49 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,6 @@ void	_nsx_pcolor(char color);
 void	_nsx_ps_exit(char *_msg, int status, char color);
 
 int		_nsx_atoi(char *str);
+void	_nsx_putbanner(int pid, char *type);
+void	handle_errors(int argc, char **argv, int pid);
 #endif

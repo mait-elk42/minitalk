@@ -6,12 +6,12 @@
 #    By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/14 14:11:05 by mait-elk          #+#    #+#              #
-#    Updated: 2024/01/06 18:24:58 by mait-elk         ###   ########.fr        #
+#    Updated: 2024/01/07 13:41:41 by mait-elk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CFLAGS= -Wall -Wextra -Werror
-UTILS= utils/ft_printer.c utils/ft_converter.c
+UTILS= utils/ft_printer.c utils/ft_utils.c
 NAME= server client
 BONUS= server_bonus client_bonus
 
