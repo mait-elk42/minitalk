@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 23:10:05 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/08 13:18:01 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/09 13:39:54 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ int	main(void)
 
 	pid = getpid();
 	act.__sigaction_u.__sa_sigaction = _nsx_handler;
+	act.sa_mask = 0;
+	act.sa_flags = 0;
 	_nsx_putbanner(pid, "BONUS PART");
+	sigaction(SIGUSR1, &act, NULL);
+	sigaction(SIGUSR2, &act, NULL);
 	while (1)
-	{
-		sigaction(SIGUSR1, &act, NULL);
-		sigaction(SIGUSR2, &act, NULL);
 		pause();
-	}
 	return (0);
 }
